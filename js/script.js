@@ -113,7 +113,7 @@ d3.json("js/como_inspections.json", function(data) {
 		d.LatLng = new L.LatLng(coord.lat, coord.lon);
 	});
 
-	var dispEst = est_name.data
+	var dispEst = data.est_name
 
 
 
