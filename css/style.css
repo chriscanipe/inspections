@@ -14,8 +14,13 @@
 	background-color: orange;
 }
 
+#tooltip { background-color: white;
+			  padding: 3px 5px;
+			  border: 1px solid black;
+			  text-align: center;}
+
 .tt {
-	position: absolute;
+	position: relative;
 	text-align: center;
 	font-size: 13px;
 	width: 60px;
@@ -27,6 +32,7 @@
 	border-radius: 8px;
 	pointer-events: none;
 	box-shadow: 2px 2px 6px #666;
+	z-index: 10;
 }
 
 .tt .estname {
