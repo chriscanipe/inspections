@@ -93,8 +93,60 @@ d3.json("js/como_inspections.json", function(data) {
 			d3.select(this).moveToFront()
 			var restaurant = d.name;
   			var violationsCount = d.violations.length;
+  			
+  			/* ****************************************** */
+  			// I've created a variable for address, and an empty variable for violations. 
+  			/* ****************************************** */
+  			var address = d.address;
+  			var violationsList = "";
+
+
+  			/* ****************************************** */
+  			// Here, we build our list of violations. //
+  			// Violations are in our data as an array, so we'll loop through them
+  			// and append each to the "violationsList" variable.
+  			/* ****************************************** */
+  			$.each(d.violations, function(i, item) {
+
+  				/* ****************************************** */
+  				// Critical violations are indicated with a 1 or 0, which is meaningless to the reader.
+  				// So I'll need a string to show on the page.
+  				// We create that here:
+  				/* ****************************************** */
+  				var critical = "Not critical";
+	  			if (d.critical == "1") {
+	  				critical = "Critical";
+	  			}
+
+	  			/* ****************************************** */
+	  			// Each violation will be a list item, so it goes in an li tag.
+	  			// You can tweak this however you'd like, but for now let's show the violation title
+	  			// and whether or not it's critical
+	  			// We build our list by adding it to the "violationsList variable" .
+	  			// Each time through the loop, the list gets longer.
+	  			// += is an operator used to append (or add) to an existing value.
+	  			/* ****************************************** */
+  				violationsList +=	
+  				"<li>"+
+  					"<p>"+item.title+"</p>"+
+  					"<p>"+critical+"</p>"+
+  				"</li>"
+  			});
+				
+			
+			/* ****************************************** */
+			// This is where we throw our values onto the page.
+			// I've set up an .info div on the page because it won't all fit in a tooltip.
+			/* ****************************************** */
+  			$(".info").html(
+  				"<h3 class='name'>"+restaurant+"</h3>"+
+  				"<p class='address'>"+address+"</p>"+
+  				"<h5>VIOLATIONS:</h5>"+
+  				"<ol class='list'>"+violationsList+"</ol>"
+  			);
+
   			d3.select(this).classed("active", true);
-  			$(".tt").show();
+  			//$(".tt").show();
 
   		})
 
@@ -102,7 +154,7 @@ d3.json("js/como_inspections.json", function(data) {
 		.on("mouseout", function(d) {
 			d3.select(this).moveToBack()
 			d3.select(this).classed("active", false);
-			$(".tt").hide();
+			//$(".tt").hide();
 
 		})
 
